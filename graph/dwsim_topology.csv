@@ -1,0 +1,19 @@
+model,relation,from,to
+DWSIM steady-state (TK101_heated_tank.dwxmz),only in DWSIM,FEED_SRC,E-101
+DWSIM steady-state (TK101_heated_tank.dwxmz),only in real_plant,FEED_SRC,TK-101
+DWSIM steady-state (TK101_heated_tank.dwxmz),in both,E-101,COND_RET
+DWSIM steady-state (TK101_heated_tank.dwxmz),in both,E-101,TK-101
+DWSIM steady-state (TK101_heated_tank.dwxmz),in both,LV-101,PROD_SINK
+DWSIM steady-state (TK101_heated_tank.dwxmz),in both,STEAM_HDR,TV-101
+DWSIM steady-state (TK101_heated_tank.dwxmz),in both,TK-101,LV-101
+DWSIM steady-state (TK101_heated_tank.dwxmz),in both,TV-101,E-101
+DWSIM dynamic (TK101_heater_dynamic.dwxmz),only in DWSIM,FEED_SRC,HTR-101
+DWSIM dynamic (TK101_heater_dynamic.dwxmz),only in DWSIM,HTR-101,TK-101
+DWSIM dynamic (TK101_heater_dynamic.dwxmz),only in DWSIM,TK-101,PROD_SINK
+DWSIM dynamic (TK101_heater_dynamic.dwxmz),only in real_plant,E-101,COND_RET
+DWSIM dynamic (TK101_heater_dynamic.dwxmz),only in real_plant,E-101,TK-101
+DWSIM dynamic (TK101_heater_dynamic.dwxmz),only in real_plant,FEED_SRC,TK-101
+DWSIM dynamic (TK101_heater_dynamic.dwxmz),only in real_plant,LV-101,PROD_SINK
+DWSIM dynamic (TK101_heater_dynamic.dwxmz),only in real_plant,STEAM_HDR,TV-101
+DWSIM dynamic (TK101_heater_dynamic.dwxmz),only in real_plant,TK-101,LV-101
+DWSIM dynamic (TK101_heater_dynamic.dwxmz),only in real_plant,TV-101,E-101

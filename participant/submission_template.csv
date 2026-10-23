@@ -1,0 +1,2 @@
+start_utc,end_utc,kind,root_cause,evidence_tags,notes
+2024-06-01T14:00:00Z,2024-06-01T18:00:00Z,fault,example only — delete before submit,CALC-UA;FIC-201.PV,

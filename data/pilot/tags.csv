@@ -1,0 +1,30 @@
+tag,description,units,role
+TIC-101.PV,Tank temperature,degC,PV
+TIC-101.SP,Tank temperature setpoint,degC,SP
+TIC-101.OP,TIC output (steam flow demand %),%,OP
+TIC-101.MODE,TIC mode 0MAN 1AUTO 2CAS,-,MODE
+FIC-201.PV,Steam flow to coil,kg/h,PV
+FIC-201.SP,Steam flow setpoint,kg/h,SP
+FIC-201.OP,Steam valve demand,%,OP
+FIC-201.MODE,FIC mode,-,MODE
+LIC-101.PV,Tank level,m,PV
+LIC-101.SP,Level setpoint,m,SP
+LIC-101.OP,Outlet valve demand,%,OP
+LIC-101.MODE,LIC mode,-,MODE
+TV-101.POS,Steam valve position,%,IND
+LV-101.POS,Outlet valve position,%,IND
+FI-101,Feed flow,m3/h,IND
+TI-100,Feed temperature,degC,IND
+FI-102,Product flow,m3/h,IND
+TI-102,Product temperature,degC,IND
+PI-201,Steam header pressure,barg,IND
+TI-201,Steam saturation temperature,degC,IND
+TI-202,Condensate return temperature,degC,IND
+TI-901,Ambient temperature,degC,IND
+AI-101,Product purity (T-correlation),%,IND
+CALC-DUTY,Steam-side coil duty,kW,CALC
+CALC-DUTY-PROC,Process-side sensible duty,kW,CALC
+CALC-EBAL,Energy balance gap (duty - process - ambient loss),kW,CALC
+CALC-APPROACH,Steam-to-bulk approach,K,CALC
+CALC-UA,Back-calculated coil UA,W/K,CALC
+CALC-MBAL,Mass balance residual,m3/h,CALC

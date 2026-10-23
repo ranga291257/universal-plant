@@ -1,0 +1,68 @@
+src,dst,edge_type,attributes_json
+FEED_SRC,L-FEED,piping,{}
+L-FEED,TK-101.N_FEED,piping,{}
+STEAM_HDR,L-STM-SUP,piping,{}
+L-STM-SUP,TV-101.IN,piping,{}
+TV-101.OUT,L-STM-COIL,piping,{}
+L-STM-COIL,E-101.S_IN,piping,{}
+E-101.C_OUT,L-COND,piping,{}
+L-COND,COND_RET,piping,{}
+TK-101.N_OUT,L-PROD-1,piping,{}
+L-PROD-1,LV-101.IN,piping,{}
+LV-101.OUT,L-PROD-2,piping,{}
+L-PROD-2,PROD_SINK,piping,{}
+TK-101.N_FEED,TK-101,part_of,{}
+TK-101.N_OUT,TK-101,part_of,{}
+E-101.S_IN,E-101,part_of,{}
+E-101.C_OUT,E-101,part_of,{}
+TV-101.IN,TV-101,part_of,{}
+TV-101.OUT,TV-101,part_of,{}
+LV-101.IN,LV-101,part_of,{}
+LV-101.OUT,LV-101,part_of,{}
+E-101,TK-101,heat_transfer,"{""R"": 50.0, ""UA_clean_kW_K"": 72.0, ""law"": ""UA_eff = UA_clean * R**(x_TV - 1)""}"
+TK-101,AMBIENT,heat_loss,"{""UA_W_K"": 500.0}"
+TI-100,L-FEED,measures,{}
+FI-101,L-FEED,measures,{}
+TI-102,L-PROD-2,measures,{}
+FI-102,L-PROD-2,measures,{}
+PI-201,L-STM-SUP,measures,{}
+TI-201,L-STM-SUP,measures,{}
+TI-202,L-COND,measures,{}
+TI-901,AMBIENT,measures,{}
+TV-101.POS,TV-101,measures,{}
+LV-101.POS,LV-101,measures,{}
+TT-101,TK-101,measures,"{""variable"": ""bulk temperature""}"
+FT-201,L-STM-SUP,measures,"{""variable"": ""steam mass flow""}"
+LT-101,TK-101,measures,"{""variable"": ""level""}"
+TT-101,TIC-101,pv_input,"{""variable"": ""TK-101 temperature""}"
+TIC-101,FIC-201,cascade_sp,"{""scale"": ""FIC-201.SP [kg/h] = 30 x TIC-101.OP [%]""}"
+FT-201,FIC-201,pv_input,"{""variable"": ""steam flow to coil""}"
+FIC-201,TV-101,op_signal,{}
+LT-101,LIC-101,pv_input,"{""variable"": ""TK-101 level""}"
+LIC-101,LV-101,op_signal,{}
+FT-201,CALC-DUTY,derived_from,{}
+TI-201,CALC-DUTY,derived_from,{}
+FI-101,CALC-DUTY-PROC,derived_from,{}
+TI-100,CALC-DUTY-PROC,derived_from,{}
+TI-102,CALC-DUTY-PROC,derived_from,{}
+CALC-DUTY,CALC-EBAL,derived_from,{}
+CALC-DUTY-PROC,CALC-EBAL,derived_from,{}
+Q-LOSS-CALC,CALC-EBAL,derived_from,{}
+TI-201,CALC-APPROACH,derived_from,{}
+TI-102,CALC-APPROACH,derived_from,{}
+CALC-DUTY,CALC-UA,derived_from,{}
+TI-201,CALC-UA,derived_from,{}
+TI-102,CALC-UA,derived_from,{}
+FI-101,CALC-MBAL,derived_from,{}
+FI-102,CALC-MBAL,derived_from,{}
+TT-101,AI-101,derived_from,{}
+TI-102,Q-LOSS-CALC,derived_from,{}
+TI-901,Q-LOSS-CALC,derived_from,{}
+TK-101,DOC-PFD,documented_by,{}
+E-101,DOC-PFD,documented_by,{}
+TV-101,DOC-PFD,documented_by,{}
+LV-101,DOC-PFD,documented_by,{}
+TK-101,DOC-PROCESS,documented_by,{}
+E-101,DOC-PROCESS,documented_by,{}
+TV-101,DOC-PROCESS,documented_by,{}
+LV-101,DOC-PROCESS,documented_by,{}

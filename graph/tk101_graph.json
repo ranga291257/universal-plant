@@ -1,0 +1,795 @@
+{
+  "nodes": [
+    {
+      "id": "FEED_SRC",
+      "kind": "boundary",
+      "description": "Feed supply",
+      "attributes": {
+        "F_m3_h": 15.0,
+        "T_C": 25.0
+      }
+    },
+    {
+      "id": "STEAM_HDR",
+      "kind": "boundary",
+      "description": "Steam header",
+      "attributes": {
+        "P_barg": 6.0
+      }
+    },
+    {
+      "id": "COND_RET",
+      "kind": "boundary",
+      "description": "Condensate return",
+      "attributes": {}
+    },
+    {
+      "id": "PROD_SINK",
+      "kind": "boundary",
+      "description": "Product to downstream",
+      "attributes": {}
+    },
+    {
+      "id": "AMBIENT",
+      "kind": "boundary",
+      "description": "Ambient air",
+      "attributes": {
+        "T_C": 20.0
+      }
+    },
+    {
+      "id": "TK-101",
+      "kind": "vessel",
+      "description": "Hold tank",
+      "attributes": {
+        "diameter_m": 2.0,
+        "height_m": 4.0,
+        "level_SP_m": 2.0,
+        "working_volume_m3": 6.28
+      }
+    },
+    {
+      "id": "E-101",
+      "kind": "heat_exchanger",
+      "description": "Steam coil (submerged in TK-101 per PFD and Python model)",
+      "attributes": {
+        "UA_clean_kW_K": 72.0,
+        "R_rangeability": 50.0
+      }
+    },
+    {
+      "id": "TV-101",
+      "kind": "control_valve",
+      "description": "Steam control valve",
+      "attributes": {
+        "positioner_tau_s": 3.0
+      }
+    },
+    {
+      "id": "LV-101",
+      "kind": "control_valve",
+      "description": "Outlet control valve (gravity outflow)",
+      "attributes": {
+        "Cv_m3_s": 0.0059
+      }
+    },
+    {
+      "id": "TK-101.N_FEED",
+      "kind": "port",
+      "description": "Feed nozzle",
+      "attributes": {
+        "parent": "TK-101"
+      }
+    },
+    {
+      "id": "TK-101.N_OUT",
+      "kind": "port",
+      "description": "Outlet nozzle",
+      "attributes": {
+        "parent": "TK-101"
+      }
+    },
+    {
+      "id": "E-101.S_IN",
+      "kind": "port",
+      "description": "Steam inlet",
+      "attributes": {
+        "parent": "E-101"
+      }
+    },
+    {
+      "id": "E-101.C_OUT",
+      "kind": "port",
+      "description": "Condensate outlet",
+      "attributes": {
+        "parent": "E-101"
+      }
+    },
+    {
+      "id": "TV-101.IN",
+      "kind": "port",
+      "description": "Inlet",
+      "attributes": {
+        "parent": "TV-101"
+      }
+    },
+    {
+      "id": "TV-101.OUT",
+      "kind": "port",
+      "description": "Outlet",
+      "attributes": {
+        "parent": "TV-101"
+      }
+    },
+    {
+      "id": "LV-101.IN",
+      "kind": "port",
+      "description": "Inlet",
+      "attributes": {
+        "parent": "LV-101"
+      }
+    },
+    {
+      "id": "LV-101.OUT",
+      "kind": "port",
+      "description": "Outlet",
+      "attributes": {
+        "parent": "LV-101"
+      }
+    },
+    {
+      "id": "L-FEED",
+      "kind": "line",
+      "description": "Feed line",
+      "attributes": {
+        "line_number": "1001"
+      }
+    },
+    {
+      "id": "L-STM-SUP",
+      "kind": "line",
+      "description": "Steam supply to TV-101",
+      "attributes": {
+        "line_number": "2001"
+      }
+    },
+    {
+      "id": "L-STM-COIL",
+      "kind": "line",
+      "description": "Steam from TV-101 to coil",
+      "attributes": {
+        "line_number": "2002"
+      }
+    },
+    {
+      "id": "L-COND",
+      "kind": "line",
+      "description": "Condensate line",
+      "attributes": {
+        "line_number": "2003"
+      }
+    },
+    {
+      "id": "L-PROD-1",
+      "kind": "line",
+      "description": "Vessel outlet to LV-101",
+      "attributes": {
+        "line_number": "1002"
+      }
+    },
+    {
+      "id": "L-PROD-2",
+      "kind": "line",
+      "description": "Product line after LV-101",
+      "attributes": {
+        "line_number": "1003"
+      }
+    },
+    {
+      "id": "TIC-101",
+      "kind": "controller",
+      "description": "Temperature controller, reverse, AUTO",
+      "attributes": {
+        "Kc": 4.5,
+        "Ti_min": 15.0,
+        "mode": "AUTO"
+      }
+    },
+    {
+      "id": "FIC-201",
+      "kind": "controller",
+      "description": "Steam flow controller, reverse, CAS (remote SP from TIC-101)",
+      "attributes": {
+        "Kc": 0.015,
+        "Ti_min": 1.0,
+        "mode": "CAS"
+      }
+    },
+    {
+      "id": "LIC-101",
+      "kind": "controller",
+      "description": "Level controller, direct, AUTO",
+      "attributes": {
+        "Kc": 200.0,
+        "Ti_min": 10.0,
+        "mode": "AUTO"
+      }
+    },
+    {
+      "id": "TT-101",
+      "kind": "instrument",
+      "description": "Tank temperature transmitter (TIC-101.PV)",
+      "attributes": {
+        "historised_as": "TIC-101.PV"
+      }
+    },
+    {
+      "id": "FT-201",
+      "kind": "instrument",
+      "description": "Steam flow transmitter (FIC-201.PV)",
+      "attributes": {
+        "historised_as": "FIC-201.PV"
+      }
+    },
+    {
+      "id": "LT-101",
+      "kind": "instrument",
+      "description": "Tank level transmitter (LIC-101.PV)",
+      "attributes": {
+        "historised_as": "LIC-101.PV"
+      }
+    },
+    {
+      "id": "TI-100",
+      "kind": "instrument",
+      "description": "Feed temperature",
+      "attributes": {}
+    },
+    {
+      "id": "FI-101",
+      "kind": "instrument",
+      "description": "Feed flow",
+      "attributes": {}
+    },
+    {
+      "id": "TI-102",
+      "kind": "instrument",
+      "description": "Product temperature",
+      "attributes": {}
+    },
+    {
+      "id": "FI-102",
+      "kind": "instrument",
+      "description": "Product flow",
+      "attributes": {}
+    },
+    {
+      "id": "PI-201",
+      "kind": "instrument",
+      "description": "Steam header pressure",
+      "attributes": {}
+    },
+    {
+      "id": "TI-201",
+      "kind": "instrument",
+      "description": "Steam saturation temperature",
+      "attributes": {}
+    },
+    {
+      "id": "TI-202",
+      "kind": "instrument",
+      "description": "Condensate temperature",
+      "attributes": {}
+    },
+    {
+      "id": "TI-901",
+      "kind": "instrument",
+      "description": "Ambient temperature",
+      "attributes": {}
+    },
+    {
+      "id": "TV-101.POS",
+      "kind": "instrument",
+      "description": "Steam valve position (indication)",
+      "attributes": {}
+    },
+    {
+      "id": "LV-101.POS",
+      "kind": "instrument",
+      "description": "Outlet valve position (indication)",
+      "attributes": {}
+    },
+    {
+      "id": "CALC-DUTY",
+      "kind": "calc",
+      "description": "Steam-side coil duty",
+      "attributes": {}
+    },
+    {
+      "id": "CALC-DUTY-PROC",
+      "kind": "calc",
+      "description": "Process-side sensible duty",
+      "attributes": {}
+    },
+    {
+      "id": "CALC-EBAL",
+      "kind": "calc",
+      "description": "Energy balance gap (duty - process - ambient loss)",
+      "attributes": {}
+    },
+    {
+      "id": "CALC-APPROACH",
+      "kind": "calc",
+      "description": "Steam-to-bulk approach",
+      "attributes": {}
+    },
+    {
+      "id": "CALC-UA",
+      "kind": "calc",
+      "description": "Back-calculated coil UA",
+      "attributes": {}
+    },
+    {
+      "id": "CALC-MBAL",
+      "kind": "calc",
+      "description": "Mass balance residual",
+      "attributes": {}
+    },
+    {
+      "id": "AI-101",
+      "kind": "calc",
+      "description": "Purity indication (temperature correlation only)",
+      "attributes": {}
+    },
+    {
+      "id": "Q-LOSS-CALC",
+      "kind": "calc_term",
+      "description": "Ambient loss term UA_loss x (T_tank - T_amb); not a tag",
+      "attributes": {
+        "UA_W_K": 500.0,
+        "T_amb_C": 20.0
+      }
+    },
+    {
+      "id": "DOC-PFD",
+      "kind": "document",
+      "description": "Conceptual PFD SVG",
+      "attributes": {
+        "path": "docs/pfd/tk-101-hold-tank.svg",
+        "revision": "1"
+      }
+    },
+    {
+      "id": "DOC-PROCESS",
+      "kind": "document",
+      "description": "Process description (participant package)",
+      "attributes": {
+        "path": "participant/PROCESS_DESCRIPTION.md"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "src": "FEED_SRC",
+      "dst": "L-FEED",
+      "type": "piping",
+      "attributes": {}
+    },
+    {
+      "src": "L-FEED",
+      "dst": "TK-101.N_FEED",
+      "type": "piping",
+      "attributes": {}
+    },
+    {
+      "src": "STEAM_HDR",
+      "dst": "L-STM-SUP",
+      "type": "piping",
+      "attributes": {}
+    },
+    {
+      "src": "L-STM-SUP",
+      "dst": "TV-101.IN",
+      "type": "piping",
+      "attributes": {}
+    },
+    {
+      "src": "TV-101.OUT",
+      "dst": "L-STM-COIL",
+      "type": "piping",
+      "attributes": {}
+    },
+    {
+      "src": "L-STM-COIL",
+      "dst": "E-101.S_IN",
+      "type": "piping",
+      "attributes": {}
+    },
+    {
+      "src": "E-101.C_OUT",
+      "dst": "L-COND",
+      "type": "piping",
+      "attributes": {}
+    },
+    {
+      "src": "L-COND",
+      "dst": "COND_RET",
+      "type": "piping",
+      "attributes": {}
+    },
+    {
+      "src": "TK-101.N_OUT",
+      "dst": "L-PROD-1",
+      "type": "piping",
+      "attributes": {}
+    },
+    {
+      "src": "L-PROD-1",
+      "dst": "LV-101.IN",
+      "type": "piping",
+      "attributes": {}
+    },
+    {
+      "src": "LV-101.OUT",
+      "dst": "L-PROD-2",
+      "type": "piping",
+      "attributes": {}
+    },
+    {
+      "src": "L-PROD-2",
+      "dst": "PROD_SINK",
+      "type": "piping",
+      "attributes": {}
+    },
+    {
+      "src": "TK-101.N_FEED",
+      "dst": "TK-101",
+      "type": "part_of",
+      "attributes": {}
+    },
+    {
+      "src": "TK-101.N_OUT",
+      "dst": "TK-101",
+      "type": "part_of",
+      "attributes": {}
+    },
+    {
+      "src": "E-101.S_IN",
+      "dst": "E-101",
+      "type": "part_of",
+      "attributes": {}
+    },
+    {
+      "src": "E-101.C_OUT",
+      "dst": "E-101",
+      "type": "part_of",
+      "attributes": {}
+    },
+    {
+      "src": "TV-101.IN",
+      "dst": "TV-101",
+      "type": "part_of",
+      "attributes": {}
+    },
+    {
+      "src": "TV-101.OUT",
+      "dst": "TV-101",
+      "type": "part_of",
+      "attributes": {}
+    },
+    {
+      "src": "LV-101.IN",
+      "dst": "LV-101",
+      "type": "part_of",
+      "attributes": {}
+    },
+    {
+      "src": "LV-101.OUT",
+      "dst": "LV-101",
+      "type": "part_of",
+      "attributes": {}
+    },
+    {
+      "src": "E-101",
+      "dst": "TK-101",
+      "type": "heat_transfer",
+      "attributes": {
+        "law": "UA_eff = UA_clean * R**(x_TV - 1)",
+        "UA_clean_kW_K": 72.0,
+        "R": 50.0
+      }
+    },
+    {
+      "src": "TK-101",
+      "dst": "AMBIENT",
+      "type": "heat_loss",
+      "attributes": {
+        "UA_W_K": 500.0
+      }
+    },
+    {
+      "src": "TI-100",
+      "dst": "L-FEED",
+      "type": "measures",
+      "attributes": {}
+    },
+    {
+      "src": "FI-101",
+      "dst": "L-FEED",
+      "type": "measures",
+      "attributes": {}
+    },
+    {
+      "src": "TI-102",
+      "dst": "L-PROD-2",
+      "type": "measures",
+      "attributes": {}
+    },
+    {
+      "src": "FI-102",
+      "dst": "L-PROD-2",
+      "type": "measures",
+      "attributes": {}
+    },
+    {
+      "src": "PI-201",
+      "dst": "L-STM-SUP",
+      "type": "measures",
+      "attributes": {}
+    },
+    {
+      "src": "TI-201",
+      "dst": "L-STM-SUP",
+      "type": "measures",
+      "attributes": {}
+    },
+    {
+      "src": "TI-202",
+      "dst": "L-COND",
+      "type": "measures",
+      "attributes": {}
+    },
+    {
+      "src": "TI-901",
+      "dst": "AMBIENT",
+      "type": "measures",
+      "attributes": {}
+    },
+    {
+      "src": "TV-101.POS",
+      "dst": "TV-101",
+      "type": "measures",
+      "attributes": {}
+    },
+    {
+      "src": "LV-101.POS",
+      "dst": "LV-101",
+      "type": "measures",
+      "attributes": {}
+    },
+    {
+      "src": "TT-101",
+      "dst": "TK-101",
+      "type": "measures",
+      "attributes": {
+        "variable": "bulk temperature"
+      }
+    },
+    {
+      "src": "FT-201",
+      "dst": "L-STM-SUP",
+      "type": "measures",
+      "attributes": {
+        "variable": "steam mass flow"
+      }
+    },
+    {
+      "src": "LT-101",
+      "dst": "TK-101",
+      "type": "measures",
+      "attributes": {
+        "variable": "level"
+      }
+    },
+    {
+      "src": "TT-101",
+      "dst": "TIC-101",
+      "type": "pv_input",
+      "attributes": {
+        "variable": "TK-101 temperature"
+      }
+    },
+    {
+      "src": "TIC-101",
+      "dst": "FIC-201",
+      "type": "cascade_sp",
+      "attributes": {
+        "scale": "FIC-201.SP [kg/h] = 30 x TIC-101.OP [%]"
+      }
+    },
+    {
+      "src": "FT-201",
+      "dst": "FIC-201",
+      "type": "pv_input",
+      "attributes": {
+        "variable": "steam flow to coil"
+      }
+    },
+    {
+      "src": "FIC-201",
+      "dst": "TV-101",
+      "type": "op_signal",
+      "attributes": {}
+    },
+    {
+      "src": "LT-101",
+      "dst": "LIC-101",
+      "type": "pv_input",
+      "attributes": {
+        "variable": "TK-101 level"
+      }
+    },
+    {
+      "src": "LIC-101",
+      "dst": "LV-101",
+      "type": "op_signal",
+      "attributes": {}
+    },
+    {
+      "src": "FT-201",
+      "dst": "CALC-DUTY",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "TI-201",
+      "dst": "CALC-DUTY",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "FI-101",
+      "dst": "CALC-DUTY-PROC",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "TI-100",
+      "dst": "CALC-DUTY-PROC",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "TI-102",
+      "dst": "CALC-DUTY-PROC",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "CALC-DUTY",
+      "dst": "CALC-EBAL",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "CALC-DUTY-PROC",
+      "dst": "CALC-EBAL",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "Q-LOSS-CALC",
+      "dst": "CALC-EBAL",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "TI-201",
+      "dst": "CALC-APPROACH",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "TI-102",
+      "dst": "CALC-APPROACH",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "CALC-DUTY",
+      "dst": "CALC-UA",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "TI-201",
+      "dst": "CALC-UA",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "TI-102",
+      "dst": "CALC-UA",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "FI-101",
+      "dst": "CALC-MBAL",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "FI-102",
+      "dst": "CALC-MBAL",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "TT-101",
+      "dst": "AI-101",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "TI-102",
+      "dst": "Q-LOSS-CALC",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "TI-901",
+      "dst": "Q-LOSS-CALC",
+      "type": "derived_from",
+      "attributes": {}
+    },
+    {
+      "src": "TK-101",
+      "dst": "DOC-PFD",
+      "type": "documented_by",
+      "attributes": {}
+    },
+    {
+      "src": "E-101",
+      "dst": "DOC-PFD",
+      "type": "documented_by",
+      "attributes": {}
+    },
+    {
+      "src": "TV-101",
+      "dst": "DOC-PFD",
+      "type": "documented_by",
+      "attributes": {}
+    },
+    {
+      "src": "LV-101",
+      "dst": "DOC-PFD",
+      "type": "documented_by",
+      "attributes": {}
+    },
+    {
+      "src": "TK-101",
+      "dst": "DOC-PROCESS",
+      "type": "documented_by",
+      "attributes": {}
+    },
+    {
+      "src": "E-101",
+      "dst": "DOC-PROCESS",
+      "type": "documented_by",
+      "attributes": {}
+    },
+    {
+      "src": "TV-101",
+      "dst": "DOC-PROCESS",
+      "type": "documented_by",
+      "attributes": {}
+    },
+    {
+      "src": "LV-101",
+      "dst": "DOC-PROCESS",
+      "type": "documented_by",
+      "attributes": {}
+    }
+  ]
+}

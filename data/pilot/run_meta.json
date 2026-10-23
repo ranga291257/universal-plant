@@ -1,0 +1,31 @@
+{
+  "start_utc": "2024-06-01T06:00:00+00:00",
+  "duration_h": 24.0,
+  "dt_s": 1.0,
+  "sample_s": 10.0,
+  "seed": 42,
+  "event": {
+    "event_id": "E001",
+    "kind": "equipment_fault",
+    "start_s": 28800,
+    "end_s": 43200,
+    "recovery_s": 50400,
+    "description": "Coil fouling: UA_clean multiplier reduced to 0.6 (40% fouling)",
+    "parameter": "ua_multiplier",
+    "magnitude": 0.6,
+    "profile": "step",
+    "expected_consequences": "Temperature held near SP by cascade; steam flow and/or TV-101 open further; CALC-UA falls; CALC-APPROACH may rise if duty same but effective UA lower.",
+    "competing_explanations": "Steam header pressure drop (PI-201/TI-201 would move); TT bias (redundant TI-102 vs TIC; steam would not need to rise for true T).",
+    "uniquely_distinguishable": true,
+    "evidence_tags": [
+      "CALC-UA",
+      "FIC-201.PV",
+      "TV-101.POS",
+      "PI-201",
+      "TIC-101.PV",
+      "TI-201"
+    ]
+  },
+  "engine": "python_ode_plant",
+  "mcp": "properties_crosscheck_only"
+}

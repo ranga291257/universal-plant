@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+output/
+tools/*.log
+tools/*.out.log
+tools/*.err.log
+.DS_Store
+*~
+*.bak
+
+# Regenerable / local-only
+blind_eval/submission*.csv
+!blind_eval/submission_template.csv
+docs/validation/diagnostic_submission_dev.csv
+data/pilot/historian_quality.parquet
+
+# Organizer-only answer key — never push to public remotes
+private/
+
+# DWSIM .dwxmz files are kept in models/dwsim/ (do not ignore)

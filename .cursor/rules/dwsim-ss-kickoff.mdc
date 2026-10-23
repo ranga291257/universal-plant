@@ -1,0 +1,32 @@
+---
+description: DWSIM dynamic runs must restore stored SS state ss_design before kickoff
+globs: models/dwsim/**/*
+alwaysApply: true
+---
+
+# DWSIM SS kickoff (TK-101)
+
+Dynamic runs leave the flowsheet drifted. Always restore the named SS before running dynamics.
+
+## Persisted kickoff (in `models/dwsim/TK101_heater_dynamic.dwxmz`)
+
+| Item | Value |
+|---|---|
+| Stored state | `ss_design` (~72 °C, 15 t/h, 885 kW, level 2 m) |
+| Schedule | `pilot_rebuild` (starts from `ss_design`) |
+| Integrator | `pilot_rebuild_int` |
+| Docs | `models/dwsim/NOTES.md` |
+
+## Required MCP sequence
+
+1. Load `models/dwsim/TK101_heater_dynamic.dwxmz`
+2. `dwsim_dynamics_state` restore `ss_design`
+3. Optional `dwsim_solve_run`
+4. `dwsim_dynamics_check` → `dwsim_dynamics_run` on `pilot_rebuild`
+5. After the run: restore `ss_design` again (or reload the file). Do **not** overwrite `ss_design` with a post-run drifted state unless the owner asks.
+
+HTR-101 and TK-101 use `Initialize using Inlet Stream = 0` so restore is not wiped by cold feed.
+
+## Roles
+
+**real_plant simulator** (`challenge/plant/`, `baseline_ic.json`) builds the historian. **digital twin** (DWSIM) is for rate / optimize / checks only — it does not rewrite the historian.

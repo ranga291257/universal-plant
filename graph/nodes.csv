@@ -1,0 +1,50 @@
+id,kind,description,attributes_json
+FEED_SRC,boundary,Feed supply,"{""F_m3_h"": 15.0, ""T_C"": 25.0}"
+STEAM_HDR,boundary,Steam header,"{""P_barg"": 6.0}"
+COND_RET,boundary,Condensate return,{}
+PROD_SINK,boundary,Product to downstream,{}
+AMBIENT,boundary,Ambient air,"{""T_C"": 20.0}"
+TK-101,vessel,Hold tank,"{""diameter_m"": 2.0, ""height_m"": 4.0, ""level_SP_m"": 2.0, ""working_volume_m3"": 6.28}"
+E-101,heat_exchanger,Steam coil (submerged in TK-101 per PFD and Python model),"{""R_rangeability"": 50.0, ""UA_clean_kW_K"": 72.0}"
+TV-101,control_valve,Steam control valve,"{""positioner_tau_s"": 3.0}"
+LV-101,control_valve,Outlet control valve (gravity outflow),"{""Cv_m3_s"": 0.0059}"
+TK-101.N_FEED,port,Feed nozzle,"{""parent"": ""TK-101""}"
+TK-101.N_OUT,port,Outlet nozzle,"{""parent"": ""TK-101""}"
+E-101.S_IN,port,Steam inlet,"{""parent"": ""E-101""}"
+E-101.C_OUT,port,Condensate outlet,"{""parent"": ""E-101""}"
+TV-101.IN,port,Inlet,"{""parent"": ""TV-101""}"
+TV-101.OUT,port,Outlet,"{""parent"": ""TV-101""}"
+LV-101.IN,port,Inlet,"{""parent"": ""LV-101""}"
+LV-101.OUT,port,Outlet,"{""parent"": ""LV-101""}"
+L-FEED,line,Feed line,"{""line_number"": ""1001""}"
+L-STM-SUP,line,Steam supply to TV-101,"{""line_number"": ""2001""}"
+L-STM-COIL,line,Steam from TV-101 to coil,"{""line_number"": ""2002""}"
+L-COND,line,Condensate line,"{""line_number"": ""2003""}"
+L-PROD-1,line,Vessel outlet to LV-101,"{""line_number"": ""1002""}"
+L-PROD-2,line,Product line after LV-101,"{""line_number"": ""1003""}"
+TIC-101,controller,"Temperature controller, reverse, AUTO","{""Kc"": 4.5, ""Ti_min"": 15.0, ""mode"": ""AUTO""}"
+FIC-201,controller,"Steam flow controller, reverse, CAS (remote SP from TIC-101)","{""Kc"": 0.015, ""Ti_min"": 1.0, ""mode"": ""CAS""}"
+LIC-101,controller,"Level controller, direct, AUTO","{""Kc"": 200.0, ""Ti_min"": 10.0, ""mode"": ""AUTO""}"
+TT-101,instrument,Tank temperature transmitter (TIC-101.PV),"{""historised_as"": ""TIC-101.PV""}"
+FT-201,instrument,Steam flow transmitter (FIC-201.PV),"{""historised_as"": ""FIC-201.PV""}"
+LT-101,instrument,Tank level transmitter (LIC-101.PV),"{""historised_as"": ""LIC-101.PV""}"
+TI-100,instrument,Feed temperature,{}
+FI-101,instrument,Feed flow,{}
+TI-102,instrument,Product temperature,{}
+FI-102,instrument,Product flow,{}
+PI-201,instrument,Steam header pressure,{}
+TI-201,instrument,Steam saturation temperature,{}
+TI-202,instrument,Condensate temperature,{}
+TI-901,instrument,Ambient temperature,{}
+TV-101.POS,instrument,Steam valve position (indication),{}
+LV-101.POS,instrument,Outlet valve position (indication),{}
+CALC-DUTY,calc,Steam-side coil duty,{}
+CALC-DUTY-PROC,calc,Process-side sensible duty,{}
+CALC-EBAL,calc,Energy balance gap (duty - process - ambient loss),{}
+CALC-APPROACH,calc,Steam-to-bulk approach,{}
+CALC-UA,calc,Back-calculated coil UA,{}
+CALC-MBAL,calc,Mass balance residual,{}
+AI-101,calc,Purity indication (temperature correlation only),{}
+Q-LOSS-CALC,calc_term,Ambient loss term UA_loss x (T_tank - T_amb); not a tag,"{""T_amb_C"": 20.0, ""UA_W_K"": 500.0}"
+DOC-PFD,document,Conceptual PFD SVG,"{""path"": ""docs/pfd/tk-101-hold-tank.svg"", ""revision"": ""1""}"
+DOC-PROCESS,document,Process description (participant package),"{""path"": ""participant/PROCESS_DESCRIPTION.md""}"
